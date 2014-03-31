@@ -62,7 +62,7 @@ class SalesLead
   def create
     client = self.class.get_client
     response = client.call(:create_sales_lead, message: {
-        'typ:salesParty' => {
+        'typ:salesLead' => {
             'lead:Description' => description,
             'lead:Name' => name
         }
