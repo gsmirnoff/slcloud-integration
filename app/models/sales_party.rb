@@ -14,7 +14,19 @@ class SalesParty
         namespaces: {
             'xmlns:typ' => 'http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/types/',
             'xmlns:typ1' => 'http://xmlns.oracle.com/adf/svc/types/',
-            'xmlns:sal' => 'http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/'
+            'xmlns:sal' => 'http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/',
+            'xmlns:org' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/organizationService/',
+            'xmlns:org1' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/organization/',
+            'xmlns:org2' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/orgContact/',
+            'xmlns:per' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/personService/',
+            'xmlns:per1' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/person/',
+            'xmlns:par' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/partyService/',
+            'xmlns:sour' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/sourceSystemRef/',
+            'xmlns:con' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/contactPointService/',
+            'xmlns:con1' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/contactPoint/',
+            'xmlns:par1' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/partySite/',
+            'xmlns:rel' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/relationshipService/',
+            'xmlns:rel1' => 'http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/relationship/'
         }
     )
   end
@@ -27,6 +39,7 @@ class SalesParty
     @status = params[:status]
     @created_date = params[:created_date]
     @created_by = params[:created_by]
+    @email = params[:email]
   end
 
   def self.find_all
@@ -50,7 +63,8 @@ class SalesParty
                                   :type => item[:party_type],
                                   :status => item[:status],
                                   :created_by => item[:created_by],
-                                  :created_date => item[:creation_date]
+                                  :created_date => item[:creation_date],
+                                  :email => item[:email_address]
                                  })
           res.push(sales_party)
         end
@@ -64,17 +78,24 @@ class SalesParty
     response = client.call(:create_sales_party, message: {
         'typ:salesParty' => {
             'sal:PartyName' => name,
-            'opp:PartyType' => type
+            'sal:OrganizationParty' => {
+                'org:OrganizationProfile' => {
+                    'org:OrganizationName' => name,
+                    'org:CreatedByModule' => 'SALES'
+                },
+                'org:CreatedByModule' => 'SALES'
+            }
         }
     })
   end
 
-  def self.delete(id)
-    client = get_client
-    response = client.call(:delete_sales_party, message: {
-        'typ:opportunity' => {
-            'sal:PartyId' => id
-        }
-    })
-  end
+  #no delete method in given webservice
+  #def self.delete(id)
+  #  client = get_client
+  #  response = client.call(:delete_sales_account, message: {
+  #      'typ:opportunity' => {
+  #          'sal:PartyId' => id
+  #      }
+  #  })
+  #end
 end
