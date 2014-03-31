@@ -1,0 +1,47 @@
+// Place all the styles related to the opportunity controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.dl-horizontal dd, .dl-horizontal dt {
+  padding-top: 10px;
+}
+
+.btn.opp.submit {
+  margin-left: 100px;
+}
+
+.btn.opp.cancel {
+  margin-top: -56px;
+  margin-left: 20px;
+}
+
+.no-margin {
+  margin-bottom: 0 !important;
+}
+
+.preloader {
+  z-index: 20;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -110px;
+  border: 1px solid;
+}
+
+.preloader > p {
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  opacity: .5;
+}

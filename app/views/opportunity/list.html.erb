@@ -1,0 +1,20 @@
+<div class="overlay"></div>
+<div class="preloader">
+    <p>Fetching collection...</p>
+    <p><%= image_tag "preloader.gif" %></p>
+</div>
+<nav class="navbar navbar-default no-margin" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Opportunities</a></li>
+                <li><%= link_to "Sales Parties", {:controller => :sales_party, :action => :list}, {:method => "get"} %></li>
+                <li><%= link_to "Sales Leads", {:controller => :sales_lead, :action => :list}, {:method => "get"} %></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="panel panel-default">
+    <div class="wait" id="table-contents" data-url="/opportunities/getall"></div>
+</div>
+<%= button_to "Create new", {action: "create"}, {:class => "btn btn-primary opp submit", :method => "get"} %>

@@ -1,0 +1,2 @@
+module SalesPartyHelper
+end

@@ -1,0 +1,25 @@
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Created By</th>
+        <th>Creation Date</th>
+        <th></th>
+    </tr>
+    <% @sales_parties.each do |elem| %>
+        <tr class="sales-party">
+            <td><%= elem.name %></td>
+            <td><%= elem.type %></td>
+            <td><%= elem.status %></td>
+            <td><%= elem.created_by %></td>
+            <td><%= elem.created_date %></td>
+            <td>
+
+                <%= link_to raw("<i class=\"glyphicon glyphicon-remove\">Delete</i>"),
+                            {:action => "delete", :id => elem.id},
+                            {class: "btn btn-default", :method => :delete} %>
+            </td>
+        </tr>
+    <% end %>
+</table>
