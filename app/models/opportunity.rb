@@ -69,6 +69,8 @@ class Opportunity
             'opp:Description' => description
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 
   def self.delete(id)
@@ -78,5 +80,7 @@ class Opportunity
             'opp:OptyId' => id
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 end

@@ -87,6 +87,8 @@ class SalesParty
             }
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 
   #no delete method in given webservice

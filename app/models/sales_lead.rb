@@ -41,17 +41,18 @@ class SalesLead
             'typ1:retrieveAllTranslations' => false
         }
     })
+
     if response.success?
       data = response.to_array(:find_sales_lead_response, :result)
       if data
         data.each do |item|
           sales_lead = self.new({:id => item[:lead_id],
-                                  :name => item[:name],
-                                  :created_date => item[:creation_date],
-                                  :created_by => item[:created_by],
-                                  :description => item[:description],
-                                  :currency_code => item[:currency_code]
-                                 })
+                                 :name => item[:name],
+                                 :created_date => item[:creation_date],
+                                 :created_by => item[:created_by],
+                                 :description => item[:description],
+                                 :currency_code => item[:currency_code]
+                                })
           res.push(sales_lead)
         end
       end
@@ -67,6 +68,8 @@ class SalesLead
             'lead:Name' => name
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 
   def self.delete(id)
@@ -76,5 +79,7 @@ class SalesLead
             'lead:LeadId' => id
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 end
