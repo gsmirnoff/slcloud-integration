@@ -72,7 +72,7 @@ class SalesLead
   def self.delete(id)
     client = get_client
     response = client.call(:delete_sales_lead, message: {
-        'typ:opportunity' => {
+        'typ:salesLead' => {
             'lead:LeadId' => id
         }
     })
