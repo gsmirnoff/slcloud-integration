@@ -16,8 +16,11 @@
             <td><%= elem.description %></td>
             <td>
 
+                <%= link_to raw("<i class=\"glyphicon glyphicon-cog\">Contact</i>"),
+                            {:controller => "opportunity_contact", :action => "list", :opp_id => elem.id, :key_contact => elem.key_contact},
+                            {class: "btn btn-default", :method => :get} %>
                 <%= link_to raw("<i class=\"glyphicon glyphicon-remove\">Delete</i>"),
-                            {:action => "delete", :id => elem.id},
+                            {:action => "delete", :id => elem.id, :party_id => @party_id},
                             {class: "btn btn-default", :method => :delete} %>
             </td>
         </tr>

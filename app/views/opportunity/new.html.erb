@@ -8,11 +8,12 @@
             <dd><%= opp.select :currency_code, options_for_select(['USD']) %></dd>
             <dt><%= label_tag(:description) %></dt>
             <dd><%= opp.text_field :description %></dd>
+            <dd><%= opp.hidden_field(:party_id, :value => @party_id) %></dd>
         </dl>
     </div>
     <%= button_tag "Create", {class: "btn btn-primary opp submit", :method => "post"} %>
 <% end %>
-<%= button_to "To list", {action: "list"}, {class: "btn btn-primary opp cancel", :method => "get"} %>
+<%= button_to "To list", {action: "list", :party_id => @party_id}, {class: "btn btn-primary opp cancel", :method => "get"} %>
 
 
 

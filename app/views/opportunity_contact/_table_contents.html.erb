@@ -1,0 +1,20 @@
+<table class="table">
+    <tr>
+        <th>First Name</th>
+        <th>last Name</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+        <tr class="contact">
+            <% unless (@contact.nil?) %>
+            <td><%= @contact.first_name%></td>
+            <td><%= @contact.last_name%></td>
+            <td><%= @contact.email%></td>
+            <td>
+                <%= link_to raw("<i class=\"glyphicon glyphicon-remove\">Delete</i>"),
+                            {:action => "delete", :id => @contact.id, :opp_id => @opp_id},
+                            {class: "btn btn-default", :method => :delete} %>
+            </td>
+            <% end %>
+        </tr>
+</table>

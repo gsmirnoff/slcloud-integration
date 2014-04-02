@@ -1,10 +1,10 @@
 Src::Application.routes.draw do
 
-  root 'opportunity#list'
+  root 'sales_party#list'
 
   get 'opportunities/list', to: 'opportunity#list'
   get 'opportunities/getall', to: 'opportunity#get_opportunities'
-  get 'opportunities/create/', to: 'opportunity#new'
+  get 'opportunities/create', to: 'opportunity#new'
   post 'opportunities/create/', to: 'opportunity#create'
   delete 'opportunities/delete/', to: 'opportunity#delete'
 
@@ -14,10 +14,10 @@ Src::Application.routes.draw do
   post 'parties/create', to: 'sales_party#create'
   delete 'parties/delete', to: 'sales_party#delete'
 
-  get 'leads/list', to: 'sales_lead#list'
-  get 'leads/getall', to: 'sales_lead#get_leads'
-  get 'leads/create/', to: 'sales_lead#new'
-  post 'leads/create', to: 'sales_lead#create'
-  delete 'leads/delete', to: 'sales_lead#delete'
+  get 'contacts/list', to: 'opportunity_contact#list'
+  get 'contacts/getall', to: 'opportunity_contact#get_contact'
+  get 'contacts/create/', to: 'opportunity_contact#new'
+  post 'contacts/create', to: 'opportunity_contact#create'
+  delete 'contacts/delete', to: 'opportunity_contact#delete'
 
 end

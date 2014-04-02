@@ -1,7 +1,7 @@
 class SalesParty
   extend ActiveModel::Naming
   include ActiveModel::Conversion
-  attr_accessor :id, :created_by, :name, :type, :status, :created_date
+
 
   def self.get_client
     return Savon.client(
@@ -31,71 +31,6 @@ class SalesParty
     )
   end
 
-  def initialize(params)
-    super()
-    @id = params[:id]
-    @name = params[:name]
-    @type = params[:type]
-    @status = params[:status]
-    @created_date = params[:created_date]
-    @created_by = params[:created_by]
-    @email = params[:email]
-  end
+  #no delete method in wsdl
 
-  def self.find_all
-    res = []
-    client = get_client
-    response = client.call(:find_sales_party, message: {
-        'typ:findCriteria' => {
-            'typ1:fetchStart' => 0,
-            'typ1:fetchSize' => -1
-        },
-        'typ:findControl' => {
-            'typ1:retrieveAllTranslations' => false
-        }
-    })
-    if response.success?
-      data = response.to_array(:find_sales_party_response, :result)
-      if data
-        data.each do |item|
-          sales_party = self.new({:id => item[:party_id],
-                                  :name => item[:party_name],
-                                  :type => item[:party_type],
-                                  :status => item[:status],
-                                  :created_by => item[:created_by],
-                                  :created_date => item[:creation_date],
-                                  :email => item[:email_address]
-                                 })
-          res.push(sales_party)
-        end
-      end
-    end
-    return res
-  end
-
-  def create
-    client = self.class.get_client
-    response = client.call(:create_sales_party, message: {
-        'typ:salesParty' => {
-            'sal:PartyName' => name,
-            'sal:OrganizationParty' => {
-                'org:OrganizationProfile' => {
-                    'org:OrganizationName' => name,
-                    'org:CreatedByModule' => 'SALES'
-                },
-                'org:CreatedByModule' => 'SALES'
-            }
-        }
-    })
-  end
-
-  #no delete method in given webservice
-  #def self.delete(id)
-  #  client = get_client
-  #  response = client.call(:delete_sales_account, message: {
-  #      'typ:opportunity' => {
-  #          'sal:PartyId' => id
-  #      }
-  #  })
-  #end
 end

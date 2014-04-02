@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a>Opportunities</a></li>
+                <li class="active"><a>Contacts</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="panel panel-default">
-    <div class="wait" id="table-contents" data-url="/opportunities/getall" data-partyid=<%= @party_id %> ></div>
+    <div class="wait" id="table-contents" data-url="/contacts/getall" data-oppid=<%= @opp_id %> data-con=<%= @key_contact %> ></div>
 </div>
-<%= link_to "Create new", {action: "create", :party_id => @party_id}, {:class => "btn btn-primary opp submit", :method => "get"} %>
+<%= link_to "Update contact", {action: "create", :opp_id => @opp_id}, {:class => "btn btn-primary opp submit", :method => "get"} %>
