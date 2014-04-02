@@ -66,6 +66,8 @@ class Opportunity
             'opp:PrimaryOrganizationId' => party_id,
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 
   def self.delete(id)
@@ -75,6 +77,8 @@ class Opportunity
             'opp:OptyId' => id
         }
     })
+  rescue Savon::SOAPFault => error
+    puts error.to_hash[:fault]
   end
 
   def self.update_contact(id, contact_id)
